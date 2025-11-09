@@ -1,0 +1,65 @@
+table constructor_results
+	lineageTag: b42f8fbb-035a-461a-94e6-04de3b417f9d
+
+	column constructorResultsId
+		dataType: int64
+		formatString: 0
+		lineageTag: 141838a8-4334-4116-b324-efd561fdaddc
+		summarizeBy: count
+		sourceColumn: constructorResultsId
+
+		annotation SummarizationSetBy = Automatic
+
+	column raceId
+		dataType: int64
+		formatString: 0
+		lineageTag: a5f09547-95d0-41f5-9613-6759f8f07c8c
+		summarizeBy: none
+		sourceColumn: raceId
+
+		annotation SummarizationSetBy = Automatic
+
+	column constructorId
+		dataType: int64
+		formatString: 0
+		lineageTag: 810b3b0f-e053-48c1-a50f-d07c7eaa9e90
+		summarizeBy: none
+		sourceColumn: constructorId
+
+		annotation SummarizationSetBy = Automatic
+
+	column points
+		dataType: int64
+		formatString: 0
+		lineageTag: ec0f43e6-b55e-4f40-8e59-6d9a12070976
+		summarizeBy: sum
+		sourceColumn: points
+
+		annotation SummarizationSetBy = Automatic
+
+	column status
+		dataType: string
+		lineageTag: 400cb533-c4c9-4088-b721-5c4d5a44a78c
+		summarizeBy: none
+		sourceColumn: status
+
+		annotation SummarizationSetBy = Automatic
+
+	partition constructor_results-73651954-5885-4164-87ba-e7883855f88c = m
+		mode: import
+		queryGroup: Raw
+		source =
+				let
+				    SharepointFolder = CSV_FilePath,
+				    FileName = "constructor_results.csv",
+				    FileToImport = SharepointFolder & FileName ,
+				    Source = Csv.Document(Web.Contents(FileToImport  ),[Delimiter=",", Columns=5, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"constructorResultsId", Int64.Type}, {"raceId", Int64.Type}, {"constructorId", Int64.Type}, {"points", Int64.Type}, {"status", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

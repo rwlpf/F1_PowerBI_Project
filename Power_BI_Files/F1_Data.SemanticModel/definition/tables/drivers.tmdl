@@ -1,0 +1,99 @@
+table drivers
+	lineageTag: 446b1f9c-5ef4-4dac-867a-481527b6135b
+
+	column driverId
+		dataType: int64
+		formatString: 0
+		lineageTag: 3820e53d-9156-49f9-bc2e-6f7e167d6f8b
+		summarizeBy: none
+		sourceColumn: driverId
+
+		annotation SummarizationSetBy = Automatic
+
+	column driverRef
+		dataType: string
+		lineageTag: a6aa9115-2169-4a71-9b4e-23c68fc776ee
+		summarizeBy: none
+		sourceColumn: driverRef
+
+		annotation SummarizationSetBy = Automatic
+
+	column number
+		dataType: string
+		lineageTag: 5cf9fcb7-9967-44f5-b6c4-3a3a5e1f8349
+		summarizeBy: none
+		sourceColumn: number
+
+		annotation SummarizationSetBy = Automatic
+
+	column code
+		dataType: string
+		lineageTag: e6ef7087-d231-4841-b4e1-f511a9c51642
+		summarizeBy: none
+		sourceColumn: code
+
+		annotation SummarizationSetBy = Automatic
+
+	column forename
+		dataType: string
+		lineageTag: d3a3add7-a79b-40e1-a7ff-8327965fd12e
+		summarizeBy: none
+		sourceColumn: forename
+
+		annotation SummarizationSetBy = Automatic
+
+	column surname
+		dataType: string
+		lineageTag: 58e2e829-f115-468e-9c03-51db268c35b0
+		summarizeBy: none
+		sourceColumn: surname
+
+		annotation SummarizationSetBy = Automatic
+
+	column dob
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: fe0dd110-f197-4390-b1b1-3a5e0120eee6
+		summarizeBy: none
+		sourceColumn: dob
+
+		variation Variation
+			isDefault
+			relationship: f7322437-d280-4ba5-bbf2-594b8c300e62
+			defaultHierarchy: LocalDateTable_b50548b1-8f43-4011-a8e2-152079710594.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column nationality
+		dataType: string
+		lineageTag: 32d91486-12f4-464a-9d6f-a0c03cbfddcc
+		summarizeBy: none
+		sourceColumn: nationality
+
+		annotation SummarizationSetBy = Automatic
+
+	column url
+		dataType: string
+		lineageTag: 0ed0a78e-a123-46b1-b31d-6a48478dd469
+		summarizeBy: none
+		sourceColumn: url
+
+		annotation SummarizationSetBy = Automatic
+
+	partition drivers-2ab877fd-516d-4f04-b4d8-9a923b22eb04 = m
+		mode: import
+		queryGroup: Raw
+		source =
+				let
+				    Source = Csv.Document(Web.Contents(CSV_FilePath & "drivers.csv"),[Delimiter=",", Columns=9, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"driverId", Int64.Type}, {"driverRef", type text}, {"number", type text}, {"code", type text}, {"forename", type text}, {"surname", type text}, {"dob", type date}, {"nationality", type text}, {"url", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

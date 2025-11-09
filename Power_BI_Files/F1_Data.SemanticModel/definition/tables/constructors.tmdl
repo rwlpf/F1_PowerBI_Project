@@ -1,0 +1,62 @@
+table constructors
+	lineageTag: c5e5b4a0-c0c5-47e0-96ac-ff25abbf1eb3
+
+	column constructorId
+		dataType: int64
+		formatString: 0
+		lineageTag: d013c757-17a3-4d5a-a7e7-52fc61cacd31
+		summarizeBy: none
+		sourceColumn: constructorId
+
+		annotation SummarizationSetBy = Automatic
+
+	column constructorRef
+		dataType: string
+		lineageTag: d621e9c4-72ab-46c0-83fd-fe28ba3c602d
+		summarizeBy: none
+		sourceColumn: constructorRef
+
+		annotation SummarizationSetBy = Automatic
+
+	column name
+		dataType: string
+		lineageTag: f8489755-901a-4658-8b85-9de99b34f3f7
+		summarizeBy: none
+		sourceColumn: name
+
+		annotation SummarizationSetBy = Automatic
+
+	column nationality
+		dataType: string
+		lineageTag: 1d09a350-ca4e-4b40-ae99-8306236e2f6f
+		summarizeBy: none
+		sourceColumn: nationality
+
+		annotation SummarizationSetBy = Automatic
+
+	column url
+		dataType: string
+		lineageTag: e414a4c0-c3e1-49ca-905a-e22ae8ea8b46
+		summarizeBy: none
+		sourceColumn: url
+
+		annotation SummarizationSetBy = Automatic
+
+	partition constructors-4478b6ff-69d6-45b1-a611-dcc622a1b037 = m
+		mode: import
+		queryGroup: Raw
+		source =
+				let
+				    SharepointFolder = CSV_FilePath,
+				    FileName = "constructors.csv",
+				    FileToImport = SharepointFolder & FileName ,
+				    Source = Csv.Document(Web.Contents(FileToImport),[Delimiter=",", Columns=5, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"constructorId", Int64.Type}, {"constructorRef", type text}, {"name", type text}, {"nationality", type text}, {"url", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

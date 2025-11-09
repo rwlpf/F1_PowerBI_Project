@@ -1,0 +1,90 @@
+table Transform_pit_stops
+	lineageTag: 7e62115f-4b5f-4788-a980-42298437d191
+
+	column raceId
+		dataType: string
+		lineageTag: 66546723-f9b6-474f-a5d3-e8354a17516c
+		summarizeBy: none
+		sourceColumn: raceId
+
+		annotation SummarizationSetBy = Automatic
+
+	column driverId
+		dataType: string
+		lineageTag: 5b334679-a62c-44ca-99b7-cd4bf6676f4a
+		summarizeBy: none
+		sourceColumn: driverId
+
+		annotation SummarizationSetBy = Automatic
+
+	column stop
+		dataType: string
+		lineageTag: 07df297f-7efe-41d4-ada4-f657a309f95f
+		summarizeBy: none
+		sourceColumn: stop
+
+		annotation SummarizationSetBy = Automatic
+
+	column lap
+		dataType: string
+		lineageTag: a5c3dbb8-4f3a-44aa-9760-8fcdecca2d2f
+		summarizeBy: none
+		sourceColumn: lap
+
+		annotation SummarizationSetBy = Automatic
+
+	column time
+		dataType: string
+		lineageTag: e97c192a-3bae-4167-998b-103bafd4e5bd
+		summarizeBy: none
+		sourceColumn: time
+
+		annotation SummarizationSetBy = Automatic
+
+	column milliseconds
+		dataType: string
+		lineageTag: 488287d0-b7ab-4e40-9236-bc73b697a5d5
+		summarizeBy: none
+		sourceColumn: milliseconds
+
+		annotation SummarizationSetBy = Automatic
+
+	column duration
+		dataType: double
+		lineageTag: 4e5c4b9f-aa9a-4c8d-9daa-4e83031405db
+		summarizeBy: sum
+		sourceColumn: duration
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition Transform_pit_stops-2010d882-abca-49b8-977d-08e5fa0c5e42 = m
+		mode: import
+		queryGroup: Transform
+		source = ```
+				let
+				  Source = Raw_pit_stops, 
+				  #"Duplicated Column" = Table.DuplicateColumn(Source, "milliseconds", "milliseconds - Copy"), 
+				  #"Removed Columns" = Table.RemoveColumns(#"Duplicated Column", {"milliseconds - Copy"}), 
+				  #"Duplicated Column1" = Table.DuplicateColumn(
+				    #"Removed Columns", 
+				    "milliseconds", 
+				    "milliseconds - Copy"
+				  ), 
+				  #"Changed Type" = Table.TransformColumnTypes(
+				    #"Duplicated Column1", 
+				    {{"milliseconds - Copy", Int64.Type}}
+				  ), 
+				  #"Added Custom" = Table.AddColumn(#"Changed Type", "Custom", each [#"milliseconds - Copy"] / 1000), 
+				  #"Changed Type1" = Table.TransformColumnTypes(#"Added Custom", {{"Custom", type number}}), 
+				  #"Removed Columns1" = Table.RemoveColumns(#"Changed Type1", {"duration", "milliseconds - Copy"}), 
+				  #"Renamed Columns" = Table.RenameColumns(#"Removed Columns1", {{"Custom", "duration"}})
+				in
+				  #"Renamed Columns"
+				```
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

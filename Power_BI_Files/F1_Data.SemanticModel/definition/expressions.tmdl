@@ -1,0 +1,8 @@
+expression CSV_FilePath = "https://raw.githubusercontent.com/rwlpf/F1_PowerBI_Project/refs/heads/main/CSVFiles/" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+	lineageTag: b95d554f-045d-46cc-b6f1-5cb78ba5dc59
+	queryGroup: Parameters
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Text
+

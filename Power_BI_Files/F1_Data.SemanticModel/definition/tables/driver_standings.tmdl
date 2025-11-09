@@ -1,0 +1,98 @@
+table driver_standings
+	lineageTag: 79ad2b4f-f31a-4c70-912b-1ac0f08192f8
+
+	column driverStandingsId
+		dataType: int64
+		formatString: 0
+		lineageTag: 552469ea-78c4-4d9b-a662-81c7082994ee
+		summarizeBy: count
+		sourceColumn: driverStandingsId
+
+		annotation SummarizationSetBy = Automatic
+
+	column raceId
+		dataType: int64
+		formatString: 0
+		lineageTag: 3b234ba2-d59c-4d1b-8361-fb94e794b81c
+		summarizeBy: none
+		sourceColumn: raceId
+
+		annotation SummarizationSetBy = Automatic
+
+	column driverId
+		dataType: int64
+		formatString: 0
+		lineageTag: 2d7ce376-0e64-48e7-a086-0a7e17737b80
+		summarizeBy: none
+		sourceColumn: driverId
+
+		annotation SummarizationSetBy = Automatic
+
+	column points
+		dataType: int64
+		formatString: 0
+		lineageTag: 2aab0d61-f234-489e-9430-576a85124aa0
+		summarizeBy: sum
+		sourceColumn: points
+
+		annotation SummarizationSetBy = Automatic
+
+	column position
+		dataType: int64
+		formatString: 0
+		lineageTag: b2f0747b-2faa-4d9f-82fa-2c44676293ee
+		summarizeBy: sum
+		sourceColumn: position
+
+		annotation SummarizationSetBy = Automatic
+
+	column positionText
+		dataType: string
+		lineageTag: 8e4ad5a8-ba94-4322-83b2-138f68df532e
+		summarizeBy: none
+		sourceColumn: positionText
+
+		annotation SummarizationSetBy = Automatic
+
+	column wins
+		dataType: int64
+		formatString: 0
+		lineageTag: e6c0d255-9032-47d2-a540-2ab65f158aa7
+		summarizeBy: sum
+		sourceColumn: wins
+
+		annotation SummarizationSetBy = Automatic
+
+	partition driver_standings-484863e0-4e92-4fe4-b7a9-a136370f815e = m
+		mode: import
+		queryGroup: Raw
+		source = ```
+				let
+				  SharepointFolder = CSV_FilePath, 
+				  FileName = "driver_standings.csv", 
+				  FileToImport = SharepointFolder & FileName, 
+				  Source = Csv.Document(
+				    Web.Contents(FileToImport), 
+				    [Delimiter = ",", Columns = 7, Encoding = 1252, QuoteStyle = QuoteStyle.None]
+				  ), 
+				  #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars = true]), 
+				  #"Changed Type" = Table.TransformColumnTypes(
+				    #"Promoted Headers", 
+				    {
+				      {"driverStandingsId", Int64.Type}, 
+				      {"raceId", Int64.Type}, 
+				      {"driverId", Int64.Type}, 
+				      {"points", Int64.Type}, 
+				      {"position", Int64.Type}, 
+				    //   {"positionText", Int64.Type}, 
+				      {"wins", Int64.Type}
+				    }
+				  )
+				in
+				  #"Changed Type"
+				```
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

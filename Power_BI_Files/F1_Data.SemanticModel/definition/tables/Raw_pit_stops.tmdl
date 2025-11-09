@@ -1,0 +1,100 @@
+table Raw_pit_stops
+	isHidden
+	lineageTag: 967f7b6c-4401-4779-b03a-5398dedf3c44
+
+	column raceId
+		dataType: string
+		isHidden
+		lineageTag: a62fba8f-d8b5-4252-b760-abfd7f32097a
+		summarizeBy: none
+		sourceColumn: raceId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column driverId
+		dataType: string
+		isHidden
+		lineageTag: 441997af-d512-4285-8a1d-7f682ec0c514
+		summarizeBy: none
+		sourceColumn: driverId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column stop
+		dataType: string
+		isHidden
+		lineageTag: 512162ee-66da-468e-a944-3876948929b5
+		summarizeBy: none
+		sourceColumn: stop
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column lap
+		dataType: string
+		isHidden
+		lineageTag: 793a4858-3d3e-44a9-823f-0461a0ef4093
+		summarizeBy: none
+		sourceColumn: lap
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column time
+		dataType: string
+		isHidden
+		lineageTag: 31ec8789-a2ec-42df-acb8-bfaa59db86dc
+		summarizeBy: none
+		sourceColumn: time
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column milliseconds
+		dataType: string
+		isHidden
+		lineageTag: eb56ce3a-9057-4c0e-92a8-074f645cf85a
+		summarizeBy: none
+		sourceColumn: milliseconds
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column duration
+		dataType: string
+		isHidden
+		lineageTag: 884a3d24-255f-433f-ac86-2e16df934d40
+		summarizeBy: none
+		sourceColumn: duration
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Raw_pit_stops-77e7c24c-e952-43a6-ac6e-a9ac3e5157fc = m
+		mode: import
+		queryGroup: Raw
+		source =
+				let
+				    SharepointFolder = CSV_FilePath,
+				    FileName = "pit_stops.csv",
+				    FileToImport = SharepointFolder & FileName ,
+				    Source = Csv.Document(Web.Contents(FileToImport ),[Delimiter=",", Columns=7, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true])
+				in
+				    #"Promoted Headers"
+
+	changedProperty = IsHidden
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

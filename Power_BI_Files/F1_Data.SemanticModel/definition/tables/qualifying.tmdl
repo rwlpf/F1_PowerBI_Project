@@ -1,0 +1,96 @@
+table qualifying
+	lineageTag: 7f147bb9-af9c-43d7-a260-a4c8508e5a9c
+
+	column qualifyId
+		dataType: int64
+		formatString: 0
+		lineageTag: 57d5136a-3636-400b-9d28-fc8c663bc622
+		summarizeBy: count
+		sourceColumn: qualifyId
+
+		annotation SummarizationSetBy = Automatic
+
+	column raceId
+		dataType: int64
+		formatString: 0
+		lineageTag: 21fa8aef-ff0c-435e-a53c-68166b952513
+		summarizeBy: none
+		sourceColumn: raceId
+
+		annotation SummarizationSetBy = Automatic
+
+	column driverId
+		dataType: int64
+		formatString: 0
+		lineageTag: ec82cf31-288a-44b1-bc50-0f8db7649cc9
+		summarizeBy: none
+		sourceColumn: driverId
+
+		annotation SummarizationSetBy = Automatic
+
+	column constructorId
+		dataType: int64
+		formatString: 0
+		lineageTag: 2334d84c-ea7d-4808-98de-21ea8be5ba40
+		summarizeBy: none
+		sourceColumn: constructorId
+
+		annotation SummarizationSetBy = Automatic
+
+	column number
+		dataType: int64
+		formatString: 0
+		lineageTag: 93cbec43-5175-458e-bbf2-320ad86a6149
+		summarizeBy: sum
+		sourceColumn: number
+
+		annotation SummarizationSetBy = Automatic
+
+	column position
+		dataType: int64
+		formatString: 0
+		lineageTag: 7763d228-d5f2-4eab-acc8-66a13faa3a61
+		summarizeBy: sum
+		sourceColumn: position
+
+		annotation SummarizationSetBy = Automatic
+
+	column q1
+		dataType: string
+		lineageTag: fdd17cb0-8871-45be-a127-5f285debe1bc
+		summarizeBy: none
+		sourceColumn: q1
+
+		annotation SummarizationSetBy = Automatic
+
+	column q2
+		dataType: string
+		lineageTag: f59740d7-4e0b-4148-b7e8-2d2ed925a644
+		summarizeBy: none
+		sourceColumn: q2
+
+		annotation SummarizationSetBy = Automatic
+
+	column q3
+		dataType: string
+		lineageTag: 4b244906-1df2-471c-856f-196e98efc6b1
+		summarizeBy: none
+		sourceColumn: q3
+
+		annotation SummarizationSetBy = Automatic
+
+	partition qualifying-b8088685-977c-4741-a3de-844e70aa83a4 = m
+		mode: import
+		queryGroup: Raw
+		source =
+				let
+				    Source = Csv.Document(Web.Contents(CSV_FilePath & "qualifying.csv"),[Delimiter=",", Columns=9, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"qualifyId", Int64.Type}, {"raceId", Int64.Type}, {"driverId", Int64.Type}, {"constructorId", Int64.Type}, {"number", Int64.Type}, {"position", Int64.Type}, {"q1", type text}, {"q2", type text}, {"q3", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
