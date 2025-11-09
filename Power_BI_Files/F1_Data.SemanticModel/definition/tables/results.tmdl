@@ -1,0 +1,168 @@
+table results
+	lineageTag: 01d21729-664b-4802-b77a-0140124afbfd
+
+	column resultId
+		dataType: int64
+		formatString: 0
+		lineageTag: ba87e93d-bea6-40e2-96f7-4a4616fc2be1
+		summarizeBy: none
+		sourceColumn: resultId
+
+		annotation SummarizationSetBy = User
+
+	column raceId
+		dataType: int64
+		formatString: 0
+		lineageTag: 7c89aaab-3ddc-4ac5-bdd4-c2e1840ed274
+		summarizeBy: none
+		sourceColumn: raceId
+
+		annotation SummarizationSetBy = Automatic
+
+	column driverId
+		dataType: int64
+		formatString: 0
+		lineageTag: f452f1d1-60bc-494d-8427-25947427c3b5
+		summarizeBy: none
+		sourceColumn: driverId
+
+		annotation SummarizationSetBy = Automatic
+
+	column constructorId
+		dataType: int64
+		formatString: 0
+		lineageTag: d5cd2d9e-6eba-470c-bc4e-b22bb714fa91
+		summarizeBy: none
+		sourceColumn: constructorId
+
+		annotation SummarizationSetBy = Automatic
+
+	column grid
+		dataType: int64
+		formatString: 0
+		lineageTag: 6dee061b-74f0-406d-8aae-bbfe98002526
+		summarizeBy: none
+		sourceColumn: grid
+
+		annotation SummarizationSetBy = User
+
+	column position
+		dataType: string
+		lineageTag: 384ebbba-9bcd-45b6-b67c-5531243fbd9a
+		summarizeBy: none
+		sourceColumn: position
+
+		annotation SummarizationSetBy = Automatic
+
+	column positionText
+		dataType: string
+		lineageTag: c9929cd3-8ca9-4490-871d-f8537a9a94d0
+		summarizeBy: none
+		sourceColumn: positionText
+
+		annotation SummarizationSetBy = Automatic
+
+	column positionOrder
+		dataType: int64
+		formatString: 0
+		lineageTag: 41993a80-cc16-4e7f-af83-c23edf9e2dd3
+		summarizeBy: sum
+		sourceColumn: positionOrder
+
+		annotation SummarizationSetBy = Automatic
+
+	column points
+		dataType: int64
+		formatString: 0
+		lineageTag: 9f6a253d-5c50-4a35-81b5-16782d1cdb70
+		summarizeBy: sum
+		sourceColumn: points
+
+		annotation SummarizationSetBy = Automatic
+
+	column laps
+		dataType: int64
+		formatString: 0
+		lineageTag: 6fc5d0c6-5a31-4de1-b346-f6efdb26e1a2
+		summarizeBy: sum
+		sourceColumn: laps
+
+		annotation SummarizationSetBy = Automatic
+
+	column time
+		dataType: string
+		lineageTag: da0ca5a3-d767-4a90-aeca-c5048382a1c6
+		summarizeBy: none
+		sourceColumn: time
+
+		annotation SummarizationSetBy = Automatic
+
+	column milliseconds
+		dataType: string
+		lineageTag: 951a638a-a8c2-4e60-a5bc-c380220056de
+		summarizeBy: none
+		sourceColumn: milliseconds
+
+		annotation SummarizationSetBy = Automatic
+
+	column fastestLap
+		dataType: string
+		lineageTag: 503f098d-c6ce-4f30-b7be-af2f0d1cd9a6
+		summarizeBy: none
+		sourceColumn: fastestLap
+
+		annotation SummarizationSetBy = Automatic
+
+	column rank
+		dataType: string
+		lineageTag: 993259a6-d20e-49e1-b9c4-1760e58380d5
+		summarizeBy: none
+		sourceColumn: rank
+
+		annotation SummarizationSetBy = Automatic
+
+	column fastestLapTime
+		dataType: string
+		lineageTag: 81841f15-bbdc-491c-95ac-b65649960f5b
+		summarizeBy: none
+		sourceColumn: fastestLapTime
+
+		annotation SummarizationSetBy = Automatic
+
+	column fastestLapSpeed
+		dataType: string
+		lineageTag: f6b8f0a5-c3c8-40d4-84db-30a233890849
+		summarizeBy: none
+		sourceColumn: fastestLapSpeed
+
+		annotation SummarizationSetBy = Automatic
+
+	column statusId
+		dataType: int64
+		formatString: 0
+		lineageTag: 717623ca-cf43-4cdb-bf8d-45ab836bbdae
+		summarizeBy: none
+		sourceColumn: statusId
+
+		annotation SummarizationSetBy = Automatic
+
+	partition results-97d9d951-e273-4239-89b5-cf5f3ae8a231 = m
+		mode: import
+		queryGroup: Raw
+		source =
+				let
+				    SharepointFolder = CSV_FilePath,
+				    FileName = "results.csv",
+				    FileToImport = SharepointFolder & FileName ,
+				    Source = Csv.Document(Web.Contents(FileToImport),[Delimiter=",", Columns=18, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"resultId", Int64.Type}, {"raceId", Int64.Type}, {"driverId", Int64.Type}, {"constructorId", Int64.Type}, {"number", Int64.Type}, {"grid", Int64.Type}, {"position", type text}, {"positionText", type text}, {"positionOrder", Int64.Type}, {"points", Int64.Type}, {"laps", Int64.Type}, {"time", type text}, {"milliseconds", type text}, {"fastestLap", type text}, {"rank", type text}, {"fastestLapTime", type text}, {"fastestLapSpeed", type text}, {"statusId", Int64.Type}}),
+				    // Removed Number column as this value is not required
+				    #"Removed Columns" = Table.RemoveColumns(#"Changed Type",{"number"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

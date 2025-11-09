@@ -1,0 +1,35 @@
+table status
+	lineageTag: d1799bd5-4fd2-4618-a1d8-bcec7ab9fc85
+
+	column statusId
+		dataType: int64
+		formatString: 0
+		lineageTag: f814c9df-e775-4089-bd4f-7c3948321c0e
+		summarizeBy: none
+		sourceColumn: statusId
+
+		annotation SummarizationSetBy = Automatic
+
+	column status
+		dataType: string
+		lineageTag: 4ac2cd82-1698-44cb-a865-34565dbd3941
+		summarizeBy: none
+		sourceColumn: status
+
+		annotation SummarizationSetBy = Automatic
+
+	partition status-97e0eb6b-908d-45ff-8686-fccaaf8ab722 = m
+		mode: import
+		queryGroup: Raw
+		source =
+				let
+				    Source = Csv.Document(Web.Contents(CSV_FilePath & "status.csv"),[Delimiter=",", Columns=2, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"statusId", Int64.Type}, {"status", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

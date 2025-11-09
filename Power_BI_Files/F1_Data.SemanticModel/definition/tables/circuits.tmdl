@@ -1,0 +1,115 @@
+table circuits
+	lineageTag: 6225d849-244d-4fc5-a2fe-8d159a3566d6
+
+	column circuitId
+		dataType: int64
+		formatString: 0
+		lineageTag: c491b14b-3910-4877-8636-dfced0f6bb54
+		summarizeBy: none
+		sourceColumn: circuitId
+
+		annotation SummarizationSetBy = Automatic
+
+	column circuitRef
+		dataType: string
+		lineageTag: f27c7fd6-3b8c-4bb6-9f69-5a8779900e3a
+		summarizeBy: none
+		sourceColumn: circuitRef
+
+		annotation SummarizationSetBy = Automatic
+
+	column name
+		dataType: string
+		lineageTag: 267ef8c0-566a-4929-8723-3dccd22f8429
+		summarizeBy: none
+		sourceColumn: name
+
+		annotation SummarizationSetBy = Automatic
+
+	column location
+		dataType: string
+		lineageTag: 2d6d2a09-1a34-4720-b4b5-29479ec65549
+		summarizeBy: none
+		sourceColumn: location
+
+		annotation SummarizationSetBy = Automatic
+
+	column country
+		dataType: string
+		lineageTag: bdc1d7d2-ddd4-4b4b-92f7-2ac0396ad6b1
+		summarizeBy: none
+		sourceColumn: country
+
+		annotation SummarizationSetBy = Automatic
+
+	column lat
+		dataType: double
+		lineageTag: ddbef4af-6f80-4d77-9085-e09b51b8322a
+		summarizeBy: none
+		sourceColumn: lat
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column lng
+		dataType: double
+		lineageTag: ada84cba-7d93-4d07-8d58-b4e20b6df180
+		summarizeBy: none
+		sourceColumn: lng
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column alt
+		dataType: string
+		lineageTag: ef0790e6-6908-4a17-8d31-806d05b49002
+		summarizeBy: none
+		sourceColumn: alt
+
+		annotation SummarizationSetBy = Automatic
+
+	column url
+		dataType: string
+		lineageTag: ff653e72-7b0c-44af-84f4-e636d1c3a39b
+		summarizeBy: none
+		sourceColumn: url
+
+		annotation SummarizationSetBy = Automatic
+
+	partition circuits-1e61fb87-bc9a-44da-b36d-9a2227855186 = m
+		mode: import
+		queryGroup: Raw
+		source = ```
+				let
+				  SharepointFolder = CSV_FilePath, 
+				  FileName = "circuits.csv", 
+				  FileToImport = SharepointFolder & FileName, 
+				  Source = Csv.Document(
+				    Web.Contents(FileToImport), 
+				    [Delimiter = ",", Columns = 9, Encoding = 65001, QuoteStyle = QuoteStyle.None]
+				  ), 
+				  #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars = true]), 
+				  #"Changed Type" = Table.TransformColumnTypes(
+				    #"Promoted Headers", 
+				    {
+				      {"circuitId", Int64.Type}, 
+				      {"circuitRef", type text}, 
+				      {"name", type text}, 
+				      {"location", type text}, 
+				      {"country", type text}, 
+				      {"lat", type number}, 
+				      {"lng", type number}, 
+				      {"alt", type text}, 
+				      {"url", type text}
+				    }
+				  )
+				in
+				  #"Changed Type"
+				```
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

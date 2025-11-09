@@ -1,0 +1,71 @@
+table lap_times
+	lineageTag: 21953b8a-0424-4a17-a102-ddabc19d0650
+
+	column raceId
+		dataType: int64
+		formatString: 0
+		lineageTag: eec7b4e6-5094-4109-ad50-fcbb991f222a
+		summarizeBy: none
+		sourceColumn: raceId
+
+		annotation SummarizationSetBy = Automatic
+
+	column driverId
+		dataType: int64
+		formatString: 0
+		lineageTag: 1a0e73d2-2934-4722-9f03-a4e72dd8488f
+		summarizeBy: none
+		sourceColumn: driverId
+
+		annotation SummarizationSetBy = Automatic
+
+	column lap
+		dataType: int64
+		formatString: 0
+		lineageTag: 19cf6fa0-a44f-4658-9e03-669f435b48ef
+		summarizeBy: sum
+		sourceColumn: lap
+
+		annotation SummarizationSetBy = Automatic
+
+	column position
+		dataType: int64
+		formatString: 0
+		lineageTag: 1f20a60f-b69d-4950-954e-72408d06462e
+		summarizeBy: sum
+		sourceColumn: position
+
+		annotation SummarizationSetBy = Automatic
+
+	column time
+		dataType: string
+		lineageTag: e5f223dd-4a11-4205-878a-df6d362b40d9
+		summarizeBy: none
+		sourceColumn: time
+
+		annotation SummarizationSetBy = Automatic
+
+	column milliseconds
+		dataType: int64
+		formatString: 0
+		lineageTag: da9fd8ff-da4e-4150-8080-488f0b3ff37d
+		summarizeBy: sum
+		sourceColumn: milliseconds
+
+		annotation SummarizationSetBy = Automatic
+
+	partition lap_times-347e3d01-69a8-4935-bc25-d0c740a09eef = m
+		mode: import
+		queryGroup: Raw
+		source =
+				let
+				    Source = Csv.Document(Web.Contents(CSV_FilePath & "lap_times.csv"),[Delimiter=",", Columns=6, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"raceId", Int64.Type}, {"driverId", Int64.Type}, {"lap", Int64.Type}, {"position", Int64.Type}, {"time", type text}, {"milliseconds", Int64.Type}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
