@@ -32,10 +32,10 @@ table lap_times
 		dataType: int64
 		formatString: 0
 		lineageTag: 1f20a60f-b69d-4950-954e-72408d06462e
-		summarizeBy: sum
+		summarizeBy: none
 		sourceColumn: position
 
-		annotation SummarizationSetBy = Automatic
+		annotation SummarizationSetBy = User
 
 	column time
 		dataType: string

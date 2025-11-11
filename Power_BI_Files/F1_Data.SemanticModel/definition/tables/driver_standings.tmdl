@@ -5,10 +5,10 @@ table driver_standings
 		dataType: int64
 		formatString: 0
 		lineageTag: 552469ea-78c4-4d9b-a662-81c7082994ee
-		summarizeBy: count
+		summarizeBy: none
 		sourceColumn: driverStandingsId
 
-		annotation SummarizationSetBy = Automatic
+		annotation SummarizationSetBy = User
 
 	column raceId
 		dataType: int64
@@ -41,10 +41,10 @@ table driver_standings
 		dataType: int64
 		formatString: 0
 		lineageTag: b2f0747b-2faa-4d9f-82fa-2c44676293ee
-		summarizeBy: sum
+		summarizeBy: none
 		sourceColumn: position
 
-		annotation SummarizationSetBy = Automatic
+		annotation SummarizationSetBy = User
 
 	column positionText
 		dataType: string

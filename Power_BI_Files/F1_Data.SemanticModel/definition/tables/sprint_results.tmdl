@@ -5,10 +5,10 @@ table sprint_results
 		dataType: int64
 		formatString: 0
 		lineageTag: b898b4e8-85f5-4d0f-9d76-630e3393a401
-		summarizeBy: count
+		summarizeBy: none
 		sourceColumn: resultId
 
-		annotation SummarizationSetBy = Automatic
+		annotation SummarizationSetBy = User
 
 	column raceId
 		dataType: int64
@@ -41,19 +41,19 @@ table sprint_results
 		dataType: int64
 		formatString: 0
 		lineageTag: a58a2d8d-de03-44cf-8fe9-419fd910e0b6
-		summarizeBy: sum
+		summarizeBy: none
 		sourceColumn: number
 
-		annotation SummarizationSetBy = Automatic
+		annotation SummarizationSetBy = User
 
 	column grid
 		dataType: int64
 		formatString: 0
 		lineageTag: 7971a033-95ed-41c8-8ce1-7445fadddcd3
-		summarizeBy: sum
+		summarizeBy: none
 		sourceColumn: grid
 
-		annotation SummarizationSetBy = Automatic
+		annotation SummarizationSetBy = User
 
 	column position
 		dataType: string
@@ -75,10 +75,10 @@ table sprint_results
 		dataType: int64
 		formatString: 0
 		lineageTag: 0a91c5e1-71dc-416c-8b4c-65a8c3b5d5b7
-		summarizeBy: sum
+		summarizeBy: none
 		sourceColumn: positionOrder
 
-		annotation SummarizationSetBy = Automatic
+		annotation SummarizationSetBy = User
 
 	column points
 		dataType: int64
@@ -93,10 +93,10 @@ table sprint_results
 		dataType: int64
 		formatString: 0
 		lineageTag: 936fac5b-8756-4391-aeb8-0d1ef54c83e4
-		summarizeBy: sum
+		summarizeBy: none
 		sourceColumn: laps
 
-		annotation SummarizationSetBy = Automatic
+		annotation SummarizationSetBy = User
 
 	column time
 		dataType: string

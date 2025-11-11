@@ -57,11 +57,6 @@ table drivers
 		summarizeBy: none
 		sourceColumn: dob
 
-		variation Variation
-			isDefault
-			relationship: f7322437-d280-4ba5-bbf2-594b8c300e62
-			defaultHierarchy: LocalDateTable_b50548b1-8f43-4011-a8e2-152079710594.'Date Hierarchy'
-
 		annotation SummarizationSetBy = Automatic
 
 		annotation UnderlyingDateTimeDataType = Date
@@ -77,6 +72,7 @@ table drivers
 	column url
 		dataType: string
 		lineageTag: 0ed0a78e-a123-46b1-b31d-6a48478dd469
+		dataCategory: WebUrl
 		summarizeBy: none
 		sourceColumn: url
 

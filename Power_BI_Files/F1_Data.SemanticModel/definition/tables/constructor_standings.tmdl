@@ -5,10 +5,10 @@ table constructor_standings
 		dataType: int64
 		formatString: 0
 		lineageTag: 9d3f7934-d969-4b63-94ee-2d3f01ab2377
-		summarizeBy: count
+		summarizeBy: none
 		sourceColumn: constructorStandingsId
 
-		annotation SummarizationSetBy = Automatic
+		annotation SummarizationSetBy = User
 
 	column raceId
 		dataType: int64
@@ -41,10 +41,10 @@ table constructor_standings
 		dataType: int64
 		formatString: 0
 		lineageTag: efc26aab-681b-47f7-80be-305b7ac95ad8
-		summarizeBy: sum
+		summarizeBy: none
 		sourceColumn: position
 
-		annotation SummarizationSetBy = Automatic
+		annotation SummarizationSetBy = User
 
 	column positionText
 		dataType: string
