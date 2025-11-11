@@ -5,10 +5,10 @@ table qualifying
 		dataType: int64
 		formatString: 0
 		lineageTag: 57d5136a-3636-400b-9d28-fc8c663bc622
-		summarizeBy: count
+		summarizeBy: none
 		sourceColumn: qualifyId
 
-		annotation SummarizationSetBy = Automatic
+		annotation SummarizationSetBy = User
 
 	column raceId
 		dataType: int64
@@ -41,19 +41,19 @@ table qualifying
 		dataType: int64
 		formatString: 0
 		lineageTag: 93cbec43-5175-458e-bbf2-320ad86a6149
-		summarizeBy: sum
+		summarizeBy: none
 		sourceColumn: number
 
-		annotation SummarizationSetBy = Automatic
+		annotation SummarizationSetBy = User
 
 	column position
 		dataType: int64
 		formatString: 0
 		lineageTag: 7763d228-d5f2-4eab-acc8-66a13faa3a61
-		summarizeBy: sum
+		summarizeBy: none
 		sourceColumn: position
 
-		annotation SummarizationSetBy = Automatic
+		annotation SummarizationSetBy = User
 
 	column q1
 		dataType: string

@@ -66,10 +66,10 @@ table results
 		dataType: int64
 		formatString: 0
 		lineageTag: 41993a80-cc16-4e7f-af83-c23edf9e2dd3
-		summarizeBy: sum
+		summarizeBy: none
 		sourceColumn: positionOrder
 
-		annotation SummarizationSetBy = Automatic
+		annotation SummarizationSetBy = User
 
 	column points
 		dataType: int64
@@ -84,10 +84,10 @@ table results
 		dataType: int64
 		formatString: 0
 		lineageTag: 6fc5d0c6-5a31-4de1-b346-f6efdb26e1a2
-		summarizeBy: sum
+		summarizeBy: none
 		sourceColumn: laps
 
-		annotation SummarizationSetBy = Automatic
+		annotation SummarizationSetBy = User
 
 	column time
 		dataType: string

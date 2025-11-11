@@ -5,10 +5,10 @@ table constructor_results
 		dataType: int64
 		formatString: 0
 		lineageTag: 141838a8-4334-4116-b324-efd561fdaddc
-		summarizeBy: count
+		summarizeBy: none
 		sourceColumn: constructorResultsId
 
-		annotation SummarizationSetBy = Automatic
+		annotation SummarizationSetBy = User
 
 	column raceId
 		dataType: int64

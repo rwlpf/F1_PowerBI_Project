@@ -10,16 +10,6 @@ relationship 48a22d45-41a3-432c-a1cf-53731590531c
 	fromColumn: constructor_standings.constructorId
 	toColumn: constructors.constructorId
 
-relationship f7322437-d280-4ba5-bbf2-594b8c300e62
-	joinOnDateBehavior: datePartOnly
-	fromColumn: drivers.dob
-	toColumn: LocalDateTable_b50548b1-8f43-4011-a8e2-152079710594.Date
-
-relationship 2a25b59d-8c1d-41d7-bd59-a7f82116b297
-	joinOnDateBehavior: datePartOnly
-	fromColumn: races.date
-	toColumn: LocalDateTable_2b7222f7-e5cf-4ef1-a0c0-f650ccdfb360.Date
-
 relationship d1690688-af2d-475a-a6f9-2aa179bb9c39
 	fromColumn: races.circuitId
 	toColumn: circuits.circuitId

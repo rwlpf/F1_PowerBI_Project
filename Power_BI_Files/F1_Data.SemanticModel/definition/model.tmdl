@@ -20,11 +20,10 @@ queryGroup Transform
 
 annotation PBI_QueryOrder = ["CSV_FilePath","circuits","constructor_results","results","constructor_standings","constructors","driver_standings","drivers","lap_times","Raw_pit_stops","qualifying","races","seasons","sprint_results","status","Transform_pit_stops"]
 
-annotation __PBI_TimeIntelligenceEnabled = 1
+annotation __PBI_TimeIntelligenceEnabled = 0
 
 annotation PBI_ProTooling = ["DevMode"]
 
-ref table DateTableTemplate_d76b1ef9-bff5-4500-baa4-635099b60aa0
 ref table circuits
 ref table constructor_results
 ref table results
@@ -32,12 +31,10 @@ ref table constructor_standings
 ref table constructors
 ref table driver_standings
 ref table drivers
-ref table LocalDateTable_b50548b1-8f43-4011-a8e2-152079710594
 ref table lap_times
 ref table Raw_pit_stops
 ref table qualifying
 ref table races
-ref table LocalDateTable_2b7222f7-e5cf-4ef1-a0c0-f650ccdfb360
 ref table seasons
 ref table sprint_results
 ref table status

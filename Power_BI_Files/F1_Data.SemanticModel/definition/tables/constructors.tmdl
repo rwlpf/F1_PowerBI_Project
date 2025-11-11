@@ -37,6 +37,7 @@ table constructors
 	column url
 		dataType: string
 		lineageTag: e414a4c0-c3e1-49ca-905a-e22ae8ea8b46
+		dataCategory: WebUrl
 		summarizeBy: none
 		sourceColumn: url
 

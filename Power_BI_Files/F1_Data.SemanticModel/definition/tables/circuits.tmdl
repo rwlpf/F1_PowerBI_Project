@@ -29,6 +29,7 @@ table circuits
 	column location
 		dataType: string
 		lineageTag: 2d6d2a09-1a34-4720-b4b5-29479ec65549
+		dataCategory: Country
 		summarizeBy: none
 		sourceColumn: location
 
@@ -37,6 +38,7 @@ table circuits
 	column country
 		dataType: string
 		lineageTag: bdc1d7d2-ddd4-4b4b-92f7-2ac0396ad6b1
+		dataCategory: City
 		summarizeBy: none
 		sourceColumn: country
 
@@ -45,6 +47,7 @@ table circuits
 	column lat
 		dataType: double
 		lineageTag: ddbef4af-6f80-4d77-9085-e09b51b8322a
+		dataCategory: Latitude
 		summarizeBy: none
 		sourceColumn: lat
 
@@ -55,6 +58,7 @@ table circuits
 	column lng
 		dataType: double
 		lineageTag: ada84cba-7d93-4d07-8d58-b4e20b6df180
+		dataCategory: Longitude
 		summarizeBy: none
 		sourceColumn: lng
 
@@ -73,6 +77,7 @@ table circuits
 	column url
 		dataType: string
 		lineageTag: ff653e72-7b0c-44af-84f4-e636d1c3a39b
+		dataCategory: WebUrl
 		summarizeBy: none
 		sourceColumn: url
 

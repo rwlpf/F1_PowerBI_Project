@@ -13,6 +13,7 @@ table seasons
 	column url
 		dataType: string
 		lineageTag: a152999e-9407-4b5c-bf2a-a178814414e0
+		dataCategory: WebUrl
 		summarizeBy: none
 		sourceColumn: url
 

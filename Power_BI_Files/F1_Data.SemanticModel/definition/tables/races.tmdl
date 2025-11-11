@@ -14,19 +14,19 @@ table races
 		dataType: int64
 		formatString: 0
 		lineageTag: e236e2c6-edee-4178-a8c7-3e6ab94dfe24
-		summarizeBy: sum
+		summarizeBy: none
 		sourceColumn: year
 
-		annotation SummarizationSetBy = Automatic
+		annotation SummarizationSetBy = User
 
 	column round
 		dataType: int64
 		formatString: 0
 		lineageTag: 3785f698-704b-40e9-9318-168e683e992f
-		summarizeBy: sum
+		summarizeBy: none
 		sourceColumn: round
 
-		annotation SummarizationSetBy = Automatic
+		annotation SummarizationSetBy = User
 
 	column circuitId
 		dataType: int64
@@ -52,11 +52,6 @@ table races
 		summarizeBy: none
 		sourceColumn: date
 
-		variation Variation
-			isDefault
-			relationship: 2a25b59d-8c1d-41d7-bd59-a7f82116b297
-			defaultHierarchy: LocalDateTable_2b7222f7-e5cf-4ef1-a0c0-f650ccdfb360.'Date Hierarchy'
-
 		annotation SummarizationSetBy = Automatic
 
 		annotation UnderlyingDateTimeDataType = Date
@@ -72,6 +67,7 @@ table races
 	column url
 		dataType: string
 		lineageTag: 1cf7f264-358b-443e-9c1c-f9d8bed2e6cc
+		dataCategory: WebUrl
 		summarizeBy: none
 		sourceColumn: url
 

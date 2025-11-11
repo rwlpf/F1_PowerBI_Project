@@ -1,59 +1,81 @@
 table Transform_pit_stops
+	isHidden
 	lineageTag: 7e62115f-4b5f-4788-a980-42298437d191
 
 	column raceId
 		dataType: string
+		isHidden
 		lineageTag: 66546723-f9b6-474f-a5d3-e8354a17516c
 		summarizeBy: none
 		sourceColumn: raceId
+
+		changedProperty = IsHidden
 
 		annotation SummarizationSetBy = Automatic
 
 	column driverId
 		dataType: string
+		isHidden
 		lineageTag: 5b334679-a62c-44ca-99b7-cd4bf6676f4a
 		summarizeBy: none
 		sourceColumn: driverId
+
+		changedProperty = IsHidden
 
 		annotation SummarizationSetBy = Automatic
 
 	column stop
 		dataType: string
+		isHidden
 		lineageTag: 07df297f-7efe-41d4-ada4-f657a309f95f
 		summarizeBy: none
 		sourceColumn: stop
+
+		changedProperty = IsHidden
 
 		annotation SummarizationSetBy = Automatic
 
 	column lap
 		dataType: string
+		isHidden
 		lineageTag: a5c3dbb8-4f3a-44aa-9760-8fcdecca2d2f
 		summarizeBy: none
 		sourceColumn: lap
+
+		changedProperty = IsHidden
 
 		annotation SummarizationSetBy = Automatic
 
 	column time
 		dataType: string
+		isHidden
 		lineageTag: e97c192a-3bae-4167-998b-103bafd4e5bd
 		summarizeBy: none
 		sourceColumn: time
+
+		changedProperty = IsHidden
 
 		annotation SummarizationSetBy = Automatic
 
 	column milliseconds
 		dataType: string
+		isHidden
 		lineageTag: 488287d0-b7ab-4e40-9236-bc73b697a5d5
 		summarizeBy: none
 		sourceColumn: milliseconds
+
+		changedProperty = IsHidden
 
 		annotation SummarizationSetBy = Automatic
 
 	column duration
 		dataType: double
+		isHidden
 		lineageTag: 4e5c4b9f-aa9a-4c8d-9daa-4e83031405db
 		summarizeBy: sum
 		sourceColumn: duration
+
+		changedProperty = IsHidden
 
 		annotation SummarizationSetBy = Automatic
 
@@ -83,6 +105,8 @@ table Transform_pit_stops
 				in
 				  #"Renamed Columns"
 				```
+
+	changedProperty = IsHidden
 
 	annotation PBI_NavigationStepName = Navigation
 
