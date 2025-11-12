@@ -5,7 +5,7 @@ table seasons
 		dataType: int64
 		formatString: 0
 		lineageTag: b01a9df0-b7e4-4059-a4ec-760d7d8883d5
-		summarizeBy: sum
+		summarizeBy: none
 		sourceColumn: year
 
 		annotation SummarizationSetBy = Automatic

@@ -764,8 +764,49 @@
       "showExtraHeaderInfo": false,
       "hideKeyFieldsWhenCollapsed": false,
       "tablesLocked": false
+    },
+    {
+      "ordinal": 6,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 1135,
+            "y": 253
+          },
+          "nodeIndex": "seasons",
+          "nodeLineageTag": "3164e4f0-f6b2-4f7d-b453-4ac6a99dcbf9",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 709,
+            "y": 48
+          },
+          "nodeIndex": "races",
+          "nodeLineageTag": "fdd5e5c5-38a9-4b28-987a-66e2396c138e",
+          "size": {
+            "height": 547,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "Layout 1",
+      "zoomValue": 100,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
     }
   ],
-  "selectedDiagram": "circuits",
+  "selectedDiagram": "Layout 1",
   "defaultDiagram": "All tables"
 }

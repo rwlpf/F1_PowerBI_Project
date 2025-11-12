@@ -78,3 +78,7 @@ relationship c942adea-d457-412c-8003-f8011fabb2a6
 	fromColumn: sprint_results.statusId
 	toColumn: status.statusId
 
+relationship 40ba0498-9e75-63c5-9beb-3b69f6672ab2
+	fromColumn: races.year
+	toColumn: seasons.year
+
