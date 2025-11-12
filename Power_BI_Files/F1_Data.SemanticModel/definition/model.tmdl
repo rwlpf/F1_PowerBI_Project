@@ -22,7 +22,7 @@ annotation PBI_QueryOrder = ["CSV_FilePath","circuits","constructor_results","re
 
 annotation __PBI_TimeIntelligenceEnabled = 0
 
-annotation PBI_ProTooling = ["DevMode"]
+annotation PBI_ProTooling = ["DevMode","TMDLView_Desktop"]
 
 ref table circuits
 ref table constructor_results

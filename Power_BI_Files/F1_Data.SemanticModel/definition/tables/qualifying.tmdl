@@ -82,13 +82,30 @@ table qualifying
 	partition qualifying-b8088685-977c-4741-a3de-844e70aa83a4 = m
 		mode: import
 		queryGroup: Raw
-		source =
+		source = ```
 				let
-				    Source = Csv.Document(Web.Contents(CSV_FilePath & "qualifying.csv"),[Delimiter=",", Columns=9, Encoding=1252, QuoteStyle=QuoteStyle.None]),
-				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
-				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"qualifyId", Int64.Type}, {"raceId", Int64.Type}, {"driverId", Int64.Type}, {"constructorId", Int64.Type}, {"number", Int64.Type}, {"position", Int64.Type}, {"q1", type text}, {"q2", type text}, {"q3", type text}})
+				  Source = Csv.Document(
+				    Web.Contents(CSV_FilePath & "qualifying.csv"), 
+				    [Delimiter = ",", Columns = 9, Encoding = 1252, QuoteStyle = QuoteStyle.None]
+				  ), 
+				  #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars = true]), 
+				  #"Changed Type" = Table.TransformColumnTypes(
+				    #"Promoted Headers", 
+				    {
+				      {"qualifyId", Int64.Type}, 
+				      {"raceId", Int64.Type}, 
+				      {"driverId", Int64.Type}, 
+				      {"constructorId", Int64.Type}, 
+				      {"number", Int64.Type}, 
+				      {"position", Int64.Type}, 
+				      {"q1", type text}, 
+				      {"q2", type text}, 
+				      {"q3", type text}
+				    }
+				  )
 				in
-				    #"Changed Type"
+				  #"Changed Type"
+				```
 
 	annotation PBI_NavigationStepName = Navigation
 

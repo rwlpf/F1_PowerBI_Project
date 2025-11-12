@@ -82,15 +82,19 @@ table Raw_pit_stops
 	partition Raw_pit_stops-77e7c24c-e952-43a6-ac6e-a9ac3e5157fc = m
 		mode: import
 		queryGroup: Raw
-		source =
+		source = ```
 				let
-				    SharepointFolder = CSV_FilePath,
-				    FileName = "pit_stops.csv",
-				    FileToImport = SharepointFolder & FileName ,
-				    Source = Csv.Document(Web.Contents(FileToImport ),[Delimiter=",", Columns=7, Encoding=1252, QuoteStyle=QuoteStyle.None]),
-				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true])
+				  SharepointFolder = CSV_FilePath, 
+				  FileName = "pit_stops.csv", 
+				  FileToImport = SharepointFolder & FileName, 
+				  Source = Csv.Document(
+				    Web.Contents(FileToImport), 
+				    [Delimiter = ",", Columns = 7, Encoding = 1252, QuoteStyle = QuoteStyle.None]
+				  ), 
+				  #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars = true])
 				in
-				    #"Promoted Headers"
+				  #"Promoted Headers"
+				```
 
 	changedProperty = IsHidden
 

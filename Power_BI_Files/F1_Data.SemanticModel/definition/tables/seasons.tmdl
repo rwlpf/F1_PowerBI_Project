@@ -22,14 +22,21 @@ table seasons
 	partition seasons-6e2bae6d-e289-4464-869a-85fa42626d1c = m
 		mode: import
 		queryGroup: Raw
-		source =
+		source = ```
 				let
-				    Source = Csv.Document(Web.Contents(CSV_FilePath & "seasons.csv"),[Delimiter=",", Columns=2, Encoding=1252, QuoteStyle=QuoteStyle.None]),
-				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
-				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"year", Int64.Type}, {"url", type text}}),
-				    #"Sorted Rows" = Table.Sort(#"Changed Type",{{"year", Order.Ascending}})
+				  Source = Csv.Document(
+				    Web.Contents(CSV_FilePath & "seasons.csv"), 
+				    [Delimiter = ",", Columns = 2, Encoding = 1252, QuoteStyle = QuoteStyle.None]
+				  ), 
+				  #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars = true]), 
+				  #"Changed Type" = Table.TransformColumnTypes(
+				    #"Promoted Headers", 
+				    {{"year", Int64.Type}, {"url", type text}}
+				  ), 
+				  #"Sorted Rows" = Table.Sort(#"Changed Type", {{"year", Order.Ascending}})
 				in
-				    #"Sorted Rows"
+				  #"Sorted Rows"
+				```
 
 	annotation PBI_NavigationStepName = Navigation
 

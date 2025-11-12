@@ -21,13 +21,20 @@ table status
 	partition status-97e0eb6b-908d-45ff-8686-fccaaf8ab722 = m
 		mode: import
 		queryGroup: Raw
-		source =
+		source = ```
 				let
-				    Source = Csv.Document(Web.Contents(CSV_FilePath & "status.csv"),[Delimiter=",", Columns=2, Encoding=1252, QuoteStyle=QuoteStyle.None]),
-				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
-				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"statusId", Int64.Type}, {"status", type text}})
+				  Source = Csv.Document(
+				    Web.Contents(CSV_FilePath & "status.csv"), 
+				    [Delimiter = ",", Columns = 2, Encoding = 1252, QuoteStyle = QuoteStyle.None]
+				  ), 
+				  #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars = true]), 
+				  #"Changed Type" = Table.TransformColumnTypes(
+				    #"Promoted Headers", 
+				    {{"statusId", Int64.Type}, {"status", type text}}
+				  )
 				in
-				    #"Changed Type"
+				  #"Changed Type"
+				```
 
 	annotation PBI_NavigationStepName = Navigation
 

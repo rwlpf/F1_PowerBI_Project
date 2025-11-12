@@ -81,13 +81,30 @@ table drivers
 	partition drivers-2ab877fd-516d-4f04-b4d8-9a923b22eb04 = m
 		mode: import
 		queryGroup: Raw
-		source =
+		source = ```
 				let
-				    Source = Csv.Document(Web.Contents(CSV_FilePath & "drivers.csv"),[Delimiter=",", Columns=9, Encoding=65001, QuoteStyle=QuoteStyle.None]),
-				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
-				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"driverId", Int64.Type}, {"driverRef", type text}, {"number", type text}, {"code", type text}, {"forename", type text}, {"surname", type text}, {"dob", type date}, {"nationality", type text}, {"url", type text}})
+				  Source = Csv.Document(
+				    Web.Contents(CSV_FilePath & "drivers.csv"), 
+				    [Delimiter = ",", Columns = 9, Encoding = 65001, QuoteStyle = QuoteStyle.None]
+				  ), 
+				  #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars = true]), 
+				  #"Changed Type" = Table.TransformColumnTypes(
+				    #"Promoted Headers", 
+				    {
+				      {"driverId", Int64.Type}, 
+				      {"driverRef", type text}, 
+				      {"number", type text}, 
+				      {"code", type text}, 
+				      {"forename", type text}, 
+				      {"surname", type text}, 
+				      {"dob", type date}, 
+				      {"nationality", type text}, 
+				      {"url", type text}
+				    }
+				  )
 				in
-				    #"Changed Type"
+				  #"Changed Type"
+				```
 
 	annotation PBI_NavigationStepName = Navigation
 

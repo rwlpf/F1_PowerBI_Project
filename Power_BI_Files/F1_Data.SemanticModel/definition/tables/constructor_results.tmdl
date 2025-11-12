@@ -48,16 +48,29 @@ table constructor_results
 	partition constructor_results-73651954-5885-4164-87ba-e7883855f88c = m
 		mode: import
 		queryGroup: Raw
-		source =
+		source = ```
 				let
-				    SharepointFolder = CSV_FilePath,
-				    FileName = "constructor_results.csv",
-				    FileToImport = SharepointFolder & FileName ,
-				    Source = Csv.Document(Web.Contents(FileToImport  ),[Delimiter=",", Columns=5, Encoding=1252, QuoteStyle=QuoteStyle.None]),
-				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
-				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"constructorResultsId", Int64.Type}, {"raceId", Int64.Type}, {"constructorId", Int64.Type}, {"points", Int64.Type}, {"status", type text}})
+				  SharepointFolder = CSV_FilePath, 
+				  FileName = "constructor_results.csv", 
+				  FileToImport = SharepointFolder & FileName, 
+				  Source = Csv.Document(
+				    Web.Contents(FileToImport), 
+				    [Delimiter = ",", Columns = 5, Encoding = 1252, QuoteStyle = QuoteStyle.None]
+				  ), 
+				  #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars = true]), 
+				  #"Changed Type" = Table.TransformColumnTypes(
+				    #"Promoted Headers", 
+				    {
+				      {"constructorResultsId", Int64.Type}, 
+				      {"raceId", Int64.Type}, 
+				      {"constructorId", Int64.Type}, 
+				      {"points", Int64.Type}, 
+				      {"status", type text}
+				    }
+				  )
 				in
-				    #"Changed Type"
+				  #"Changed Type"
+				```
 
 	annotation PBI_NavigationStepName = Navigation
 
